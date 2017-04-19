@@ -1,20 +1,12 @@
 
-function something(value){
-
-  document.getElementById("test").innerHTML = value;
-
-
-}
-
-
-function doTheTing(){
+function createPDM(){
 
 
   var area = document.getElementById("contentArea");
 
   // variables for the information needed to populate PDMs
   var productImage = "Placeholder.png";
-  var url = "https://google.com";
+  var url = "reaspberry pi"; //"https://google.com";
   var siteName = "Google";
   var price = "100.00";
 
@@ -54,31 +46,40 @@ function doTheTing(){
 
 }
 
-function followURL(){
-  //var g = this.getAttribute("");
-  //chrome.tabs.create({url: "https://google.com"});
-}
+// establish connection with background script
+var port = chrome.extension.connect({
+     name: "Transfer Connection"
+});
+
+port.onMessage.addListener(function(msg) {
+     //console.clear();
+     console.log(msg);
+
+     // send the msg to seperate functions that will populate the popup
+
+});
 
 $(document).ready(function(){
 
-  for(var j = 0; j < 3; j++){
-    doTheTing();
+  for(var j = 0; j < 11; j++){
+    createPDM();
   }
 
-  //chrome.tabs.create({url: "https://google.com"});
-
-  var products = document.getElementsByClassName('PDM');
-
-  /*for(var i = 0; i < products.length; i++){
-
-    products.addEventListener('click', followURL(), false);
-
-  }*/
+  /*
+  * QUERY EXAMPLE shopping
+  * https://www.google.com/search?output=search&tbm=shop&q=raspberry+pi
+  *
+  * QUERY EXAMPLE google search
+  * https://www.google.com/#q=raspberry+pi
+  */
 
 
+  /*$.get( "https://google.com", function( data ) {
 
+    console.log(data);
 
+  });*/
 
-
+  //var products = document.getElementsByClassName('PDM');
 
 });
